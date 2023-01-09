@@ -1,0 +1,27 @@
+rootProject.name = 'DemoCallSdk'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+includeBuild('../node_modules/react-native-gradle-plugin')
+
+if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true") {
+    include(":ReactAndroid")
+    project(":ReactAndroid").projectDir = file('../node_modules/react-native/ReactAndroid')
+    include(":ReactAndroid:hermes-engine")
+    project(":ReactAndroid:hermes-engine").projectDir = file('../node_modules/react-native/ReactAndroid/hermes-engine')
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories { // Warning: this repository is going to shut down soon
+        google()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+           name = "GitHubPackages"
+           url = uri("https://maven.pkg.github.com/datasutram/merchantaquisition-sdk%22")
+           credentials {
+               username = "alok-mani-ds"
+               password = "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"
+           }
+       }
+    }
+}
